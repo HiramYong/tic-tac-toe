@@ -37,7 +37,7 @@ class Game extends Component {
             <h2>
               Game Rules
             </h2>
-            The winner is the first one who conect the three points into a line<br></br>
+            The winner is the first one who connect the three points into a line<br></br>
             <Button variant="contained" color="secondary" className={classes.button}
                     onClick={() => {this.handleRestart()}}
             >
