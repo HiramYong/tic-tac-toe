@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import store from '../redux/index';
+import {resetSquares} from '../redux/actions';
+
 
 const styles = (theme) => ({
   card: {
@@ -15,6 +18,15 @@ const styles = (theme) => ({
 })
 
 class Game extends Component {
+  constructor() {
+    super();
+    this.handleRestart = this.handleRestart.bind(this);
+  }
+
+  handleRestart() {
+    store.dispatch(resetSquares());
+  }
+  
   render() {
     const { classes } = this.props;
     return (
@@ -25,10 +37,10 @@ class Game extends Component {
             <h2>
               Game Rules
             </h2>
-            
-            The winner is the first one who conect the three points info a line<br></br>
-
-            <Button variant="contained" color="secondary" className={classes.button}>
+            The winner is the first one who conect the three points into a line<br></br>
+            <Button variant="contained" color="secondary" className={classes.button}
+                    onClick={() => {this.handleRestart()}}
+            >
               Go
             </Button>
           </CardContent>

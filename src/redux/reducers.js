@@ -5,11 +5,15 @@ const stateDefault = {
     xIsNext: true,
 }
 
-const squaresInfo = (state = stateDefault, action) => {
+
+const squaresInfo = (state = Object.assign({}, stateDefault), action) => {
     switch(action.type) {
         case 'ADDSQUARES':
             state.squares = action.squares;
             state.xIsNext = action.xIsNext;
+            return state;
+        case 'RESETQUARES':
+            state = Object.assign({}, stateDefault);
             return state;
         default:
             return state;

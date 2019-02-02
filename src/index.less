@@ -20,24 +20,32 @@ code {
       text-align: center;
     }
   }
-  .board{
-    display: flex;
-    flex-direction: column;
+  .board-wrapper{
     width: 90%;
-    height: 360px;
+    max-width: 370px;
     margin: 0 auto;
-    border: 1px solid #eaeaea;
-    border-radius: 10px;
-    .board-row{
+    text-align: center;
+    span{
+      display: inline-block;
+      margin: 10px 0;
+    }
+    .board{
       display: flex;
-      flex: 1;
-      .square{
+      flex-direction: column;
+      height: 360px;
+      border: 1px solid #eaeaea;
+      border-radius: 10px;
+      .board-row{
+        display: flex;
         flex: 1;
-        font-size: 40px;
-        border: 1px solid #eaeaea;
-        margin: 3px;
-        background: #f8f8f8;
-        outline: none;
+        .square{
+          flex: 1;
+          font-size: 40px;
+          border: 1px solid #eaeaea;
+          margin: 3px;
+          background: #f8f8f8;
+          outline: none;
+        }
       }
     }
   }

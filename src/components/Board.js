@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Square from './Square';
 import store from '../redux/index';
-import {addSquares, setWinner } from '../redux/actions';
+import {addSquares} from '../redux/actions';
 
 export default class Board extends Component {
   constructor() {
@@ -18,20 +18,19 @@ export default class Board extends Component {
   }
 
   componentDidMount() {
-      this.getSquaresInfo();
+    this.getSquaresInfo();
   }
 
-//   componentWillUpdate() {
-//     // this.props.handleWinner('true');
-//     alert(333)
-//   }
-
+  componentDidUpdate() {
+    const winner = this.calculateWinner(this.state.squares);
+    this.props.onVal(winner);
+  }
 
   getSquaresInfo() {
-      this.setState({
-        squares: store.getState().squaresInfo.squares,
-        xIsNext: store.getState().squaresInfo.xIsNext,
-      })
+    this.setState({
+      squares: store.getState().squaresInfo.squares,
+      xIsNext: store.getState().squaresInfo.xIsNext,
+    })
   }
   
   /**
@@ -85,45 +84,38 @@ export default class Board extends Component {
       return null;
   }
 
-//   shouldComponentUpdate(nextProps,nextState){
-//     const winner = this.calculateWinner(nextState.squares);
-//     this.props.handleWinner(winner);
-//     return true
-//   } 
-
   render() {
-    console.log('我被渲染了几次')
     const winner = this.calculateWinner(this.state.squares);
-    // store.dispatch(setWinner(winner));
-    // // alert(3)
-    // this.props.handleWinner(winner);
     let status;
 
     if (winner) {
         status = `Winner is ${winner}!`
     } else {
-        status = `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
+        status = `Next player is ${this.state.xIsNext ? 'X' : 'O'}`;
     }
 
     return (
-      <div className="board">
+      <div className="board-wrapper">
         <span>{status}</span>
-        <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
+        <div className="board">
+          <div className="board-row">
+              {this.renderSquare(0)}
+              {this.renderSquare(1)}
+              {this.renderSquare(2)}
+          </div>
+          <div className="board-row">
+              {this.renderSquare(3)}
+              {this.renderSquare(4)}
+              {this.renderSquare(5)}
+          </div>
+          <div className="board-row">
+              {this.renderSquare(6)}
+              {this.renderSquare(7)}
+              {this.renderSquare(8)}
+          </div>
         </div>
       </div>
+      
     )
   }
 }
